@@ -1,0 +1,18 @@
+use "bw4t-client-3.10.1.jar" with 
+	clientip ="localhost", clientport="2000", 
+	serverip = "localhost", serverport = "8000",
+	agentcount = "2", humancount = "0", launchgui = "false", goal = "true".
+	
+define robot {
+	use robotUpdate for updates.
+	use robotControl for decisions.
+	
+	% percept handling
+	replace in/1. % indicates that the robot is in a room.
+	update state/1. % keeps track of state of movement of the robot.
+	add zone/5. % provides initial information about all the places in BW4T.
+}
+
+launchpolicy {
+	when * launch robot.
+}
