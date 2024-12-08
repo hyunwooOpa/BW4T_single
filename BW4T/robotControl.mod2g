@@ -5,7 +5,10 @@ module robotControl {
 	% goto a room that has not been visited.
 	if not_yet_visited(PlaceID), not( state(traveling) )
 		then goTo(PlaceID).
+		
+	if not( state(traveling)), next_color_needed(ColorID), block(_, ColorID, PlaceID)
+		then goTo(PlaceID).
 
-	% terminate the agent if there are no more rooms to visit.
-	if not( not_yet_visited(_) ) then exit-module.
+	% terminate the agent when the current sequenceIndex is the same as the length of the total sequence. 
+	if sequence(List), length(List,Index), sequenceIndex(Index) then exit-module.
 }
