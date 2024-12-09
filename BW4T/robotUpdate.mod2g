@@ -5,7 +5,10 @@ module robotUpdate {
 	if in(PlaceID), room(PlaceID) then insert( visited(PlaceID) ).
 	
 	% store the blocks in memory.
-    if in(PlaceID), room(PlaceID) then
+    if in(PlaceID), room(PlaceID), color(_,_) then
         {forall color(BlockID, ColorID) do
             insert(block(BlockID, ColorID, PlaceID)).}
+            
+	if holdingblocks(Blocks), member(BlockID, Blocks), block(BlockID, ColorID, PlaceID) then 
+	        delete(block(BlockID, ColorID, PlaceID)). 
 }

@@ -9,7 +9,7 @@
 	color/2.
 	atBlock/1.
 	holdingblocks/1.
-	block/3.
+	block(0, 0, 0). % Set to 0,0,0 because if unbound it would always be true in robotControl.
 
 % A room is a place with exactly one neighbour; in other words, there is only one way to
 % get to and from that place.
