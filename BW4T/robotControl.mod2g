@@ -2,25 +2,26 @@ use bw4tKnowledge.
 
 % module for moving the robot around in the BW4T environment.
 module robotControl {
-	
-	if not(state(traveling)), not(holdingblocks([])), in('DropZone')
-		then putDown.
-	
-	% If holding a block go to dropzone.
-	if not(state(traveling)), not(holdingblocks([]))
-		then goTo('DropZone').
-	
-	% If at a needed block and not holding anything then pickup block.
-	if not(state(traveling)), in(PlaceID), room(PlaceID), atBlock(BlockID), color(BlockID, ColorID), next_color_needed(ColorID), holdingblocks([])
-		then pickUp(BlockID).
-	
-	% If in a room and needed color is there then go to that block. 
-	if not(state(traveling)), in(PlaceID), room(PlaceID), next_color_needed(ColorID), color(BlockID, ColorID), not(atBlock(BlockID))
-		then goToBlock(BlockID).
-	
-    % Go to a room containing a needed block
-	if not(state(traveling)), next_color_needed(ColorID), block(_, ColorID, PlaceID), room(PlaceID) 
-	    then goTo(PlaceID).
+	if found_all_blocks_still_needed then {
+		
+		if not(state(traveling)), not(holdingblocks([])), in('DropZone')
+			then putDown.
+		
+		% If holding a block go to dropzone.
+		if not(state(traveling)), not(holdingblocks([]))
+			then goTo('DropZone').
+		
+		% If at a needed block and not holding anything then pickup block.
+		if not(state(traveling)), in(PlaceID), room(PlaceID), atBlock(BlockID), color(BlockID, ColorID), next_color_needed(ColorID), holdingblocks([])
+			then pickUp(BlockID).
+		
+		% If in a room and needed color is there then go to that block. 
+		if not(state(traveling)), in(PlaceID), room(PlaceID), next_color_needed(ColorID), color(BlockID, ColorID), not(atBlock(BlockID))
+			then goToBlock(BlockID).
+		
+	    % Go to a room containing a needed block
+		if not(state(traveling)), next_color_needed(ColorID), block(_, ColorID, PlaceID), room(PlaceID) 
+		    then goTo(PlaceID). }
 
 
     % Go to a room that has not been visited.

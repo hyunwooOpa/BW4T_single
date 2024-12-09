@@ -20,3 +20,20 @@ not_yet_visited(PlaceID) :- room(PlaceID), not( visited(PlaceID) ).
 
 %Get the next color that is needed.
 next_color_needed(ColorID) :- sequenceIndex(Index), sequence(List), nth0(Index, List, ColorID).
+
+% can_form_sequence(NeededColors, AvailableColors): Check if NeededColors can be formed from AvailableColors.
+can_form_sequence([], _).  % An empty list can always be formed
+can_form_sequence([Color|RestNeeded], AvailableColors) :-
+    append(Front, [Color|Back], AvailableColors),  
+    append(Front, Back, RemainingColors),         
+    can_form_sequence(RestNeeded, RemainingColors).  
+
+
+% Predicate is true when the sequence can be formed from the available blocks.
+found_all_blocks_still_needed :-
+    sequence(NeededColors),                         
+    findall(ColorID, block(_, ColorID, _), AvailableColors),  
+    can_form_sequence(NeededColors, AvailableColors).  
+
+
+
