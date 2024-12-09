@@ -1,3 +1,22 @@
+/*
+
+contact information
+
+Name
+1. Hyunwoo Song
+2. ..
+
+Student number
+1. 2791848
+2. ...
+
+Email adress
+1. h.song5@student.vu.nl
+2. ..
+
+*/
+
+
 use "bw4t-client-3.10.1.jar" with 
 	clientip ="localhost", clientport="2000", 
 	serverip = "localhost", serverport = "8000",
